@@ -1,0 +1,68 @@
+services:
+  postgres-primary:
+    image: postgres:16
+    container_name: postgres-primary
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: sampledb
+      REPLICATION_USER: replicator
+      REPLICATION_PASSWORD: pass1234q
+    volumes:
+      - pg_primary_data:/var/lib/postgresql/data
+    networks:
+      - pg-network
+
+  postgres-secondary:
+    image: postgres:16
+    container_name: postgres-secondary
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: sampledb
+      REPLICATION_USER: replicator
+      REPLICATION_PASSWORD: pass1234q
+    depends_on:
+      - postgres-primary
+    networks:
+      - pg-network
+    command: "postgres -c wal_level=replica -c hot_standby=on"
+
+  pgpool:
+    image: bitnami/pgpool:4
+    container_name: pgpool
+    environment:
+      PGPOOL_BACKEND_NODES: '0:postgres-primary:5432,1:postgres-secondary:5432'
+      PGPOOL_SR_CHECK_USER: 'admin'
+      PGPOOL_SR_CHECK_PASSWORD: 'admin123'
+      PGPOOL_ADMIN_USERNAME: 'admin'
+      PGPOOL_POSTGRES_USERNAME: 'admin'
+      PGPOOL_POSTGRES_PASSWORD: 'admin123'
+      PGPOOL_ADMIN_PASSWORD: 'pgadmin123'
+    ports:
+    - "5432:5432"
+    depends_on:
+    - postgres-primary
+    - postgres-secondary
+    networks:
+    - pg-network
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+    ports:
+    - "9000:80"
+    depends_on:
+    - pgpool
+    networks:
+    - pg-network
+networks:
+  pg-network:
+    driver: bridge
+
+volumes:
+  pg_primary_data:
+  pg_secondary_data:
