@@ -87,3 +87,37 @@ PGPOOL_ADMIN_PASSWORD:
         user: admin
         password: admin123
     ```
+
+1.  Using the active connection (pgpool), try creating a table and few records.
+
+    ```sql
+    CREATE TABLE company (
+    COMPANY_ID varchar(6) NOT NULL DEFAULT '',
+    COMPANY_NAME varchar(25) DEFAULT NULL,
+    COMPANY_CITY varchar(25) DEFAULT NULL,
+    PRIMARY KEY (COMPANY_ID)
+    );
+
+    INSERT INTO company (COMPANY_ID, COMPANY_NAME, COMPANY_CITY) VALUES
+    ('18', 'Order All', 'Boston\r'),
+    ('15', 'Jack Hill Ltd', 'London\r'),
+    ('16', 'Akas Foods', 'Delhi\r'),
+    ('17', 'Foodies.', 'London\r'),
+    ('19', 'sip-n-Bite.', 'New York\r');
+
+    commit;
+    ```
+
+1.  Now, disconnect the pgpool server and create another connection to `secondary` database.
+
+    ```yml
+    General:
+        name: second
+    Connection:
+        Host: postgres-secondary
+        User: admin
+        Password: admin123
+
+    ```
+
+1.  Try to find a table in `sampledb` of `second` database server (right click -> refresh)
