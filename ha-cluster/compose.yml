@@ -6,8 +6,8 @@ services:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin123
       POSTGRES_DB: sampledb
-      REPLICATION_USER: replicator
-      REPLICATION_PASSWORD: pass1234q
+      REPLICATION_USER: admin
+      REPLICATION_PASSWORD: admin123
     volumes:
       - pg_primary_data:/var/lib/postgresql/data
     networks:
@@ -20,8 +20,8 @@ services:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin123
       POSTGRES_DB: sampledb
-      REPLICATION_USER: replicator
-      REPLICATION_PASSWORD: pass1234q
+      REPLICATION_USER: admin
+      REPLICATION_PASSWORD: admin123
     depends_on:
       - postgres-primary
     networks:
