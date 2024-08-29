@@ -3,7 +3,7 @@
 1.  Download the sample database
 
     ```bash
-    curl -o orderdb.sql https://raw.githubusercontent.com/mahendra-shinde/postgres-demos/main/order-db.sql 
+    curl -o order-db.sql https://raw.githubusercontent.com/mahendra-shinde/postgres-demos/main/order-db.sql 
     ```
 
 1.  Connect PSQL and Create new `sample` database; import all data from downloaded SQL file.
