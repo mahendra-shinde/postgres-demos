@@ -41,3 +41,42 @@ PGPOOL_ADMIN_USER:
 PGPOOL_ADMIN_PASSWORD:
     Description: The password for the Pgpool-II administrative user defined in PGPOOL_ADMIN_USER.
     Example: admin_password
+
+## Steps
+
+1.  Create a new directory c:\postgres-ha and launch Visual studio code
+
+    ```cmd
+    C:
+    mkdir postgres-ha
+    code postgres-ha
+    ```
+
+1.  Inside VS Code, create a new file `compose.yml` and copy the contents of [this](./compose.yml) file.
+
+1.  Save the file (CTRL+S)
+
+1.  Open Terminal (Terminal Menu -> New ) and use following command to launch HA Cluster
+
+    ```bash
+    docker-compose up -d
+    docker-compose ps
+    ```
+
+1.  Access PgAdmin on `localhost:9000` and login using credentials
+
+    ```ini
+    Username=admin@admin.com
+    Password=admin123
+    ```
+
+1.  Connect to pgpool using following connection properties:
+
+    ```yml
+    General:
+        name: pgpool
+    Connection:
+        host: pgpool
+        user: admin
+        password: admin123
+    ```
