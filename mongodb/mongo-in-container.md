@@ -75,3 +75,40 @@
 
     db.movies.find( {} )
     ```
+
+# Import from CSV file
+
+1. Download the CSV from powershell / command prompt
+
+    ```bash
+    curl -omovies-db.csv https://raw.githubusercontent.com/mahendra-shinde/postgres-demos/main/mongodb/moviesDB.csv
+
+    docker cp movies-db.csv mdb:/opt/bitnami/
+    ```
+
+2.  Launch mongoshell in docker container
+
+    ```bash
+    docker exec -it mdb mongosh
+
+    test> use admin
+    admin> db.createCollection( "movies3" )
+    admin> exit
+    ```
+
+3.  Launch BASH shell inside container to import data file
+
+    ```bash
+    docker exec -it mdb bash
+     ... /$ mongoimport --type csv --file /opt/bitnami/movies-db.csv --headerline --db=admin --collection=movies3
+    exit
+    ```
+
+4.   Launch mongoshell in docker container
+
+    ```bash
+    docker exec -it mdb mongosh
+    test> use admin
+    admin> db.movies3.find ( {} )
+    admin> exit
+    ```
