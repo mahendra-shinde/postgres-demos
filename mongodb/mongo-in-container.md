@@ -81,7 +81,7 @@
 1. Download the CSV from powershell / command prompt
 
     ```bash
-    curl -omovies-db.csv https://raw.githubusercontent.com/mahendra-shinde/postgres-demos/main/mongodb/moviesDB.csv
+    curl -o movies-db.csv https://raw.githubusercontent.com/mahendra-shinde/postgres-demos/main/mongodb/moviesDB.csv
 
     docker cp movies-db.csv mdb:/opt/bitnami/
     ```
