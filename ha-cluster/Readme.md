@@ -117,7 +117,6 @@ PGPOOL_ADMIN_PASSWORD:
         Host: postgres-secondary
         User: admin
         Password: admin123
-
     ```
 
 1.  Try to find a table in `sampledb` of `second` database server (right click -> refresh)
