@@ -29,7 +29,7 @@
 1.  List all databases, There is no Semi-colon needed !!!!
 
     ```bash
-    test> show database
+    test> show databases
     ```
 
 1.  Switch to (USE) database "admin"
