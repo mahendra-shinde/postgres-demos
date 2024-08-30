@@ -1,50 +1,51 @@
 # Deploy MongoDB in Container
 
-1. Launch a container of MongoDB built by vendor "bitnami"
+1.  Launch a container of MongoDB built by vendor "bitnami"
 
-```bash
-docker run --name mdb -e ALLOW_EMPTY_PASSWORD=true -d bitnami/mongodb
-```
+    ```bash
+    docker run --name mdb -e ALLOW_EMPTY_PASSWORD=true -d bitnami/mongodb
+    ```
 
-1. Verify if Mongo DB Container is RUNNING
+1.  Verify if Mongo DB Container is RUNNING
 
-```bash
-docker ps
-```
+    ```bash
+    docker ps
+    ```
 
-1. Connect Mongo Shell from container mdb
+1.  Connect Mongo Shell from container mdb
 
-```bash
-docker exec -it mdb mongosh
-```
+    ```bash
+    docker exec -it mdb mongosh
+    ```
 
-1. Once connected, the default mongo instance name is "test"
-1. You should get a Mongo SHell prompt test>
+1.  Once connected, the default mongo instance name is "test"
 
-```bash
-test> _
-```
+1.  You should get a Mongo SHell prompt test>
 
-1. List all databases, There is no Semi-colon needed !!!!
+    ```bash
+    test> _
+    ```
 
-```bash
-test> show database
-```
+1.  List all databases, There is no Semi-colon needed !!!!
 
-1. Switch to (USE) database "admin"
+    ```bash
+    test> show database
+    ```
 
-```bash
-test> use admin
-```
+1.  Switch to (USE) database "admin"
 
-1. Now, the prompt changes to name of database in use
+    ```bash
+    test> use admin
+    ```
 
-```bash
-admin> _
-```
+1.  Now, the prompt changes to name of database in use
 
-1. List all collections
+    ```bash
+    admin> _
+    ```
 
-```bash
-admin> show collections
-```
+1.  List all collections
+
+    ```bash
+    admin> show collections
+    ```
