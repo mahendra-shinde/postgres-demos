@@ -49,3 +49,29 @@
     ```bash
     admin> show collections
     ```
+
+1.  Create a new collection `movies`
+
+    ```bash
+    admin> db.createCollection( 'movies' )
+    admin> use movies
+    movies> _
+    ```
+
+1.  Try finding all the documents in collection `movies`, expect EMPTY response
+
+    ```bash
+    movies> db.movies.find( {} )
+
+
+    ```
+
+1.  Add two new movies
+
+    ```bash
+    movies> db.movies.insertOne(  { _id: 101, title: "Sholay", year: "1975" } )
+
+    movies> db.movies.insertOne( { _id: 102, title: "Kung fu hustle", year: "1990" } )
+
+    db.movies.find( {} )
+    ```
