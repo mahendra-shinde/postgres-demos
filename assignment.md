@@ -26,7 +26,7 @@ You are tasked with creating and managing a PostgreSQL database for a fictional 
    **Books Table:**
    ```sql
    CREATE TABLE Books (
-       ISBN VARCHAR(13) PRIMARY KEY,
+       ISBN VARCHAR(20) PRIMARY KEY,
        title VARCHAR(255) NOT NULL,
        author VARCHAR(255),
        publisher VARCHAR(255),
