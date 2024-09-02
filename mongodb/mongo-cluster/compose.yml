@@ -3,6 +3,7 @@ services:
     image: mongo:latest
     container_name: mongo-primary
     hostname: mongo-primary
+    entrypoint: ["mongod","--replSet","rs0","--bind_ip_all"]
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: admin123
@@ -18,6 +19,7 @@ services:
     image: mongo:latest
     container_name: mongo-secondary1
     hostname: mongo-secondary1
+    entrypoint: ["mongod","--replSet","rs0","--bind_ip_all"]
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: admin123
@@ -31,6 +33,7 @@ services:
     image: mongo:latest
     container_name: mongo-secondary2
     hostname: mongo-secondary2
+    entrypoint: ["mongod","--replSet","rs0","--bind_ip_all"]
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: admin123
@@ -40,6 +43,7 @@ services:
     networks:
       - mongo-cluster
 
+  
 volumes:
   mongo-primary-data:
   mongo-secondary1-data:
