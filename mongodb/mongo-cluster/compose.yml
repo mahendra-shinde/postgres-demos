@@ -1,0 +1,49 @@
+services:
+  mongo-primary:
+    image: mongo:latest
+    container_name: mongo-primary
+    hostname: mongo-primary
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin123
+      MONGO_INITDB_REPLICA_SET_NAME: "rs0"
+    ports:
+      - "27017"
+    volumes:
+      - mongo-primary-data:/data/db
+    networks:
+      - mongo-cluster
+
+  mongo-secondary1:
+    image: mongo:latest
+    container_name: mongo-secondary1
+    hostname: mongo-secondary1
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin123
+      MONGO_INITDB_REPLICA_SET_NAME: "rs0"
+    volumes:
+      - mongo-secondary1-data:/data/db
+    networks:
+      - mongo-cluster
+
+  mongo-secondary2:
+    image: mongo:latest
+    container_name: mongo-secondary2
+    hostname: mongo-secondary2
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin123
+      MONGO_INITDB_REPLICA_SET_NAME: "rs0"
+    volumes:
+      - mongo-secondary2-data:/data/db
+    networks:
+      - mongo-cluster
+
+volumes:
+  mongo-primary-data:
+  mongo-secondary1-data:
+  mongo-secondary2-data:
+
+networks:
+  mongo-cluster:
