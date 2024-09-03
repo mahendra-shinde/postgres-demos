@@ -73,3 +73,73 @@
     ```
 
 1.  Close both Command prompt windows `prompt 1` and `prompt 2`
+
+## Manage Users
+
+1.   Open TWO command prompts 
+
+    > prompt 1
+
+    ```pwsh
+    docker exec -it  -u root mongo1 bash
+    ```
+
+    > Prompt 2
+    ```pwsh
+    docker exec -it  -u root mongo1 bash
+
+1.  Now in `Prompt 1` try to login into mongosh using root user
+
+    ```pwsh
+    mongosh -u root -p pass1234
+    use appDB
+    ```
+
+1.  Create a new user with `reader` role.
+
+    ```bash
+    use admin
+    show roles # List existing roles
+    db.createUser({
+        user: "user1",
+        pwd: "password",
+        roles: [{ role: "read", db: "appDB" }]
+    })
+    show users
+    ```
+
+1.  Now, in `prompt 2` try connecting to mongoshell with new user
+
+    ```pwsh
+    ### SYNTAX
+    # mongosh -u USERNAME -p PASSWORD 
+    mongosh -u user1 -p password 
+    use appDB
+    db.createCollection("contacts")
+    # EXPECTED AN AUTHORIZATION ERROR !
+    exit
+    ```
+
+1.  Switch back to `Prompt 1` and create another user with `ReadWrite` role.
+
+    ```bash
+    use admin
+    db.createUser({
+        user: "user2",
+        pwd: "password",
+        roles: [{ role: "readWrite", db: "appDB" }]
+    })
+    show users
+    ```
+
+1.  Switch to `Prompt 1` and try login with new user `user2`
+
+    ```pwsh
+    ### SYNTAX
+    # mongosh -u USERNAME -p PASSWORD 
+    mongosh -u user2 -p password 
+    use appDB
+    db.createCollection("contacts")
+    # EXPECTED SUCCESS !
+    exit
+    ```    
