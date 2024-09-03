@@ -46,7 +46,7 @@
 
     ```pwsh
     mkdir /opt/bitnami/mongodb/backups
-    mongodump -u root -p pass1234 -d admin -c movies -o /opt/bitnami/mongodb/backups
+    mongodump -u root -p pass1234 -d admin -c movies -o /opt/bitnami/mongodb/backups/admin/
     ```
 
 1.  In `Prompt 1` (First Command prompt) use following command to delete the collection `movies`
