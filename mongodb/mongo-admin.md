@@ -4,7 +4,7 @@
 
     Start Powershell
 
-    ```pwsh
+    ```bash
     docker stop %(docker ps -aq)
     docker container prune 
     Delete All ? _Y
@@ -14,7 +14,7 @@
 
 1.  Launch a new mongodb container instance.
 
-    ```pwsh
+    ```bash
     docker run --name mongo1 -e ALLOW_EMPTY_PASSWORD=true -e MONGODB_ROOT_USER=root -e MONGODB_ROOT_PASSWORD=pass1234 -d bitnami/mongodb
     docker ps 
     ```
@@ -22,18 +22,18 @@
 1.  Launch Two Command Prompts, Run following command on both prompt.
 
     > Prompt 1 
-    ```pwsh
+    ```bash
     docker exec -it  -u root mongo1 bash
     ```
 
     > Prompt 2
-    ```pwsh
+    ```bash
     docker exec -it  -u root mongo1 bash
     ```
 
 1.  In `Prompt 1` (First Command prompt) use following command to get inside `mongosh` and create collection and documents.
 
-    ```pwsh
+    ```bash
     mongosh -u root -p pass1234 
     use admin
     db.createCollection("movies")
@@ -44,14 +44,14 @@
 
 1.  In `Prompt 2` (Second command prompt) use following commands to backup `movies` collection
 
-    ```pwsh
+    ```bash
     mkdir /opt/bitnami/mongodb/backups
     mongodump -u root -p pass1234 -d admin -c movies -o /opt/bitnami/mongodb/backups
     ```
 
 1.  In `Prompt 1` (First Command prompt) use following command to delete the collection `movies`
 
-    ```pwsh
+    ```bash
     use admin
     db.movies.drop()
     show collections
@@ -60,13 +60,13 @@
 
 1.  In `Prompt 2` (Second command prompt) use following commands to restore `movies` collection
 
-    ```pwsh
+    ```bash
     mongorestore -u root -p pass1234 -d admin --dir=/opt/bitnami/mongodb/backups/admin/movies.bson
     ```
 
 1.  In `Prompt 1` (First Command prompt) use following command to verify collection `movies` restored from backup.
 
-    ```pwsh
+    ```bash
     use admin
     show collections
     db.movies.find()
@@ -78,71 +78,68 @@
 
 1.  Open TWO command prompts 
 
-> prompt 1
+    > prompt 1
+    ```bash
+    docker exec -it  -u root mongo1 bash
+    ```
 
-```pwsh
-docker exec -it  -u root mongo1 bash
-```
-
-> Prompt 2
-    
-    
-```pwsh
-docker exec -it  -u root mongo1 bash
-```
+    > Prompt 2    
+    ```bash
+    docker exec -it  -u root mongo1 bash
+    ```
 
 1.  Now in `Prompt 1` try to login into mongosh using root user
 
-```pwsh
-mongosh -u root -p pass1234
-use appDB
-```
+    ```bash
+    mongosh -u root -p pass1234
+    use appDB
+    ```
 
 1.  Create a new user with `reader` role.
 
-```bash
-use admin
-show roles # List existing roles
-db.createUser({
-    user: "user1",
-    pwd: "password",
-    roles: [{ role: "read", db: "appDB" }]
-})
-show users
-```
+    ```bash
+    use admin
+    show roles # List existing roles
+    db.createUser({
+        user: "user1",
+        pwd: "password",
+        roles: [{ role: "read", db: "appDB" }]
+    })
+    show users
+    ```
 
 1.  Now, in `prompt 2` try connecting to mongoshell with new user
 
-```pwsh
-### SYNTAX
-# mongosh -u USERNAME -p PASSWORD 
-mongosh -u user1 -p password 
-use appDB
-db.createCollection("contacts")
-# EXPECTED AN AUTHORIZATION ERROR !
-exit
-```
+    ```bash
+    ### SYNTAX
+    # mongosh -u USERNAME -p PASSWORD 
+    mongosh -u user1 -p password 
+    use appDB
+    db.createCollection("contacts")
+    # EXPECTED AN AUTHORIZATION ERROR !
+    exit
+    ```
 
 1.  Switch back to `Prompt 1` and create another user with `ReadWrite` role.
 
-```bash
-use admin
-db.createUser({
-    user: "user2",
-    pwd: "password",
-    roles: [{ role: "readWrite", db: "appDB" }]
-})
-show users
-```
+    ```bash
+    use admin
+    db.createUser({
+        user: "user2",
+        pwd: "password",
+        roles: [{ role: "readWrite", db: "appDB" }]
+    })
+    show users
+    ```
 
 1.  Switch to `Prompt 2` and try login with new user `user2`
 
-```pwsh
-### SYNTAX
-# mongosh -u USERNAME -p PASSWORD 
-mongosh -u user2 -p password 
-use appDB
-db.createCollection("contacts")
-# EXPECTED SUCCESS !
-exit
-```    
+    ```bash
+    ### SYNTAX
+    # mongosh -u USERNAME -p PASSWORD 
+    mongosh -u user2 -p password 
+    use appDB
+    db.createCollection("contacts")
+    # EXPECTED SUCCESS !
+    exit
+    ```    
