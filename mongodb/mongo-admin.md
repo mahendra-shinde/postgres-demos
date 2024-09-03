@@ -87,6 +87,7 @@
     > Prompt 2
     ```pwsh
     docker exec -it  -u root mongo1 bash
+    ```
 
 1.  Now in `Prompt 1` try to login into mongosh using root user
 
@@ -132,7 +133,7 @@
     show users
     ```
 
-1.  Switch to `Prompt 1` and try login with new user `user2`
+1.  Switch to `Prompt 2` and try login with new user `user2`
 
     ```pwsh
     ### SYNTAX
