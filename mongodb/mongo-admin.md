@@ -46,7 +46,7 @@
 
     ```pwsh
     mkdir /opt/bitnami/mongodb/backups
-    mongodump -u root -p pass1234 -d admin -c movies -o /opt/bitnami/mongodb/backups/admin/
+    mongodump -u root -p pass1234 -d admin -c movies -o /opt/bitnami/mongodb/backups
     ```
 
 1.  In `Prompt 1` (First Command prompt) use following command to delete the collection `movies`
@@ -61,7 +61,7 @@
 1.  In `Prompt 2` (Second command prompt) use following commands to restore `movies` collection
 
     ```pwsh
-    mongorestore -u root -p pass1234 -d admin --dir=/opt/bitnami/mongodb/backups/admin/movies.bson
+    mongorestore -u root -p pass1234 -d admin --dir=/opt/bitnami/backups/admin/movies.bson
     ```
 
 1.  In `Prompt 1` (First Command prompt) use following command to verify collection `movies` restored from backup.
