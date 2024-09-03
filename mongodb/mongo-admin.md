@@ -61,7 +61,7 @@
 1.  In `Prompt 2` (Second command prompt) use following commands to restore `movies` collection
 
     ```pwsh
-    mongorestore -u root -p pass1234 -d admin --dir=/opt/bitnami/backups/admin/movies.bson
+    mongorestore -u root -p pass1234 -d admin --dir=/opt/bitnami/mongodb/backups/admin/movies.bson
     ```
 
 1.  In `Prompt 1` (First Command prompt) use following command to verify collection `movies` restored from backup.
